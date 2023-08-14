@@ -1,0 +1,255 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<!-- Download Bootstrap-->
+	<!--link bootstrap first
+	Else, it display as internal CSS not external CSS. This way custom style overrides bootstrap if needed.-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">	
+	<!--Note: link to use icons must be in base template to work in child templates)-->	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<!--link css -->
+	<!--NOTE:internal CSS from parent/base template is used in child template that extends it;-->
+	<!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
+	<link href="{% static 'CSS/StyleSheet_cold_meats.css' %}" rel = "stylesheet" type = "text/css"> 
+	<!-- required meta tags
+	incl encoding
+	incl responsive view for mobile devices-->
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Catalogue</title>	
+</head>
+	
+<!-- create an online catalogue for cold meats. 
+○ Add 4 items to the page.
+
+use the class name row created by bootstrap
+○ Have your cards become responsive (make them change when
+the user moves their mouse over them).
+○ Have your page display a price and name for each product.
+○ Include a button under each product to “buy” the product (this does
+not need to be functional yet!) 
+-NTS: When I put a file inside assets to separate img for each html file, the path did not work
+and images would not load on the website. -->
+	<body style="background-color: #F5F5F5; box-shadow: 0 0 5px #FFF5EE;">
+		<!--Use the grid system-->	
+		<!--place side navbar-->
+		<!--wrap a navbar in a .container to center it on a page–though note that an inner container is still required-->
+		<div class="container">
+			<div class = "row">			
+				<div class = "col-md-4">
+					<nav class="nav flex-column"
+						style="font-size: 25px;
+						background-color: #AFEEEE80;
+						border:#AFEEEE;						
+						padding: 20px;
+						box-shadow: 0 0 30px #AFEEEE; ">
+						<div class="container-fluid">
+							<!--add pig icon/img-->
+							<b class=" bi bi-piggy-bank-fill">
+								<a class="navbar-brand" aria-current="page" id="cold_meats" href="{% url 'catalogue:index' %}">
+									<h2>Cold Meats</h2>
+								</a> 
+							</b>
+							<br><br>
+							
+							<!--welcome user-->
+							<i>
+								<span class="navbar-text " style="color: black;">
+									Welcome, <br> {{ request.user }}
+								</span>
+							</i>
+							<br><br>
+							<a class="nav-link" href="{% url 'catalogue:index' %}">Catalogue</a>
+							<a class="nav-link" href="{% url 'blog:blog home' %}">Blog</a>
+							<a class="nav-link" href="{% url 'polls:index' %}">
+								<p class="bi bi-pencil-square"> Polls</p>
+							</a> 
+							<a class="nav-link" href="{% url 'user_auth:logout' %}">Logout</a>	
+							<i class="bi bi-whatsapp"> 062 649 0298</i>							
+						</div>
+					</nav>
+				</div>
+		
+		<!-- add row and col-md-8 so that the section border does not overlap the side navbar-->
+		<!--horizonatally center section element within its parent container with mx-auto-->		
+		<div class = "row">			
+			<div class = "col-md-8 mx-auto">
+				{% block content %}
+					<!--place a heading in italics-->
+					<section >						
+						<div class = "row">			
+							<header>
+								<h1 id="cold_meats"><span><i><b>Cold meats</b></i></span></h1>
+							</header>
+							<br>  
+						</div>
+					</section>
+			
+					<!--about us paragraph-->
+					<section>
+						<div class = "row">		
+							<h2>About us</h2>
+								<p>Welcome to Kuilsriver Cold Meats, a family run business that has been serving the community for over 5 years. 
+								We offer a selection of delicious and fresh cold meats, from bacon to viennas. 
+								Whether you need a quick snack, a sandwich filler, or a platter for a special occasion, we have something for everyone. 
+								We are proud to uphold our values of honesty, quality, and service. 
+								Come and visit us today and see why we are the best in town.
+								</p>
+						</div>
+					</section>
+			
+					<!--title-->
+					<section>						
+						<div class = "row">
+							<h2>Shop</h2>	
+							<h5>
+								<i class="bi bi-whatsapp"> 062 649 0298</i>
+							</h5>
+						</div>
+					
+					
+						<!--place items-->
+						<div class="container-fluid text-center">
+							<!--use class=my for margin above/below the card
+							align row content vertically & horizontally-->
+							<div class="row my-5 align-items-center justify-content-center">	
+								<!--Add the d-flex and justify-content-center classes to the column. 
+								This will make the column a flex container and center its contents horizontally-->
+								<div class = "col d-flex justify-content-center">
+									<!--item 1-->
+									<div class="card mx-4" id="catalogue_card">
+										<!--inline css because external was not showing!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!collectstatic again-->									
+										<img src= "{% static 'assets/bacon.jpg' %}" alt="Insert picture" class="card-img-top" style="height: 400px; object-fit: cover;">
+										<div class="card-body" id="no-underline">
+											<h4 class="card-title"><i>Bacon 1kg</i></h4>
+											<p><i>R125</i></p>
+										</div>	
+									</div>
+									
+									<!--item 2-->
+									<div class="card mx-4" id="catalogue_card">					
+										<img src= "{% static 'assets/vienna.jpg' %}" alt="Insert picture" class="card-img-top" style="height: 400px; object-fit: cover;">
+										<div class="card-body" id="no-underline">
+											<h4 class="card-title"><i>Viennas 1kg</i></h4>
+											<p><i>R80</i></p>
+										</div>	
+									</div>	
+								</div>	
+							</div>	
+						</div>	
+						<br>    
+			
+						
+							<!--use class=my for margin above/below the card
+							align row content vertically & horizontally-->
+							<div class="row my-5 align-items-center justify-content-center">	
+								<!--Add the d-flex and justify-content-center classes to the column. 
+								This will make the column a flex container and center its contents horizontally-->
+								<div class = "col d-flex justify-content-center">
+									<!--item 3-->
+									<div class="card mx-4" id="catalogue_card">					
+										<img src= "{% static 'assets/long_cheese-griller.jpg' %}" alt="Insert picture" class="card-img-top" style="height: 400px; object-fit: cover;">
+										<div class="card-body" id="no-underline">
+											<h4 class="card-title"><i>Long Cheese Grillers 1kg</i></h4>
+											<p><i>R125</i></p>
+										</div>	
+									</div>
+									
+									<!--item 4-->
+									<div class="card mx-4" id="catalogue_card">					
+										<img src= "{% static 'assets/##' %}" alt="image unavailable" class="card-img-top" style="height: 400px; object-fit: cover;">
+										<div class="card-body" id="no-underline">
+											<h4 class="card-title"><i>Short Cheese Grillers</i></h4>
+											<p><i>R95</i></p>
+										</div>	
+									</div>	
+								</div>	
+							</div>	
+						</div>					
+					</section>
+				
+			
+					<br>    
+			
+					<!--reviews-->
+					<section id="review">
+						<div class = "row d-flex align-items-center justify-content-center">
+							<h3>Reviews<i class="bi bi-stars"></i></h3>
+							<br>
+							<!--put stars in a div to ensure it displays on 1 row-->
+							<div>
+								<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+							</div>
+							<p>This bacon is so crispy and tasty, I can't get enough of it. It has a perfect balance of fat and lean, and it cooks evenly in the pan. I like to pair it with eggs and toast for a hearty meal that keeps me going all day.</p>
+							<br>
+							<div>
+								<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+							</div>
+							<p>These viennas are juicy and flavorful, with a nice snap when you bite into them. They are great for making hot dogs, or slicing and adding to salads, soups or casseroles. They are also easy to prepare, just boil or grill them and enjoy.</p>
+							<br>
+							<div>
+								<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+							</div>
+							<p>These long cheese grillers are amazing, they have a rich cheese filling that melts in your mouth. They are perfect for grilling on the barbecue, or baking in the oven with some tomato sauce and cheese. They are also very filling, one pack can feed a whole family.</p>
+							<br>
+							<div>
+								<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+							</div>
+							<p>These cheese grillers are similar to the long ones, but smaller and more convenient. They are ideal for snacking on the go, or packing in lunch boxes. They have a mild cheese flavor that goes well with any sauce or dip. They are also very affordable, you get a lot of value for your money.</p>
+							<br>
+							<div>
+								<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+							</div>
+							<p>This is the best deal for cheese lovers, you get a whole kilogram of cheese grillers for a low price. You can use them for any occasion, whether it's a party, a picnic or a family dinner. They are always fresh and delicious, and everyone loves them.</p>
+							<br>					
+						</div>
+					</section>
+					<br>
+				{% endblock %}
+			</div>					
+		</div>	
+		
+			<!-- ● Footer
+			○ Create a horizontal form.
+			○ This form should get the contact details of the customer (this does
+			not need to be functional yet!)
+			○ Include a small company logo next to the form -->
+			<footer>					
+				<!--add pig icon/img-->
+				<i class=" bi bi-piggy-bank-fill" style="font-size:28px;"></i>
+				<h3>Subscribe to our blog!</h3>
+				<form class = "formedit" style = "justify-content: center; display: flex;">
+					<table>
+					<tr>
+						<td>Gender</td>
+						<td>First name</td>
+						<td>Surname</td>
+						<td>Email</td>
+					</tr>
+					<tr>
+						<td><select>			
+							<option value = "female"> Female</option>
+							<option value = "male" > Male</option>
+							<option value = "other" > Other</option>
+						</select></td>
+						<td><input type = "text" name = "First name"/></td>
+						<td><input type = "text" name = "Surname"/></td>
+						<td><input type = "text" name = "Email" placeholder= "user@domain.com"/></td>
+						<td><input type="submit" value ="Add subscriber" id="Add_subscriber"/></td>	
+					</tr>
+					</table>		
+					<br>			
+					
+				</form>
+					<br>	
+			
+				<p class = "formedit">Last updated on 26 July 2023</p>
+			</footer>
+			
+				
+		<!--container div-->
+		</div>
+	</body>
+</html>

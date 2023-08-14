@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<!--link bootstrap first-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<!--Note: link to use icons must be in base template to work in child templates)-->	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<!--link css -->
+	<!--NOTE:internal CSS from parent/base template is used in child template that extends it;
+	<!--internal CSS in child template won't apply-->
+	<!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
+	<link rel = "stylesheet" type = "text/css" href="{% static 'CSS/stylesheet_user_auth.css' %}"> 
+	<!-- required meta tags-->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+		{% block title %}
+			Create user
+		{% endblock %}
+	</title>
+	<style>
+		/* use h-offset v-offset blur spread color; for box shadow & incl moz + webkit for different (older) browsers
+		Flex items are arranged vertically in a column from top to bottom. 
+		vertically center with mt, mb auto in container.
+		element's position will be calculated relative to its normal position in the document flow, rather than relative to the viewport or any other positioned elements */
+		.reg_card {
+			width: 450px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: SeaShell;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+			box-shadow: 0 0 30px #AFEEEE;
+		
+		}
+		
+		/* --leave space around the form */
+		.form_container {
+			margin-top: 120px;
+			margin-bottom: 100px;
+		}
+				
+		/* Set a style for the submit button */
+		.btn {
+			background-color: #AFEEEE;
+		;
+			color: black;
+			padding: 15px 20px;
+			border: none;
+			cursor: pointer;
+			width: 40%;
+			opacity: 1;
+		}
+		
+		.btn:hover {
+			opacity: 0.8;
+			color:#AFEEEE;
+		}
+		
+		/* styles for user_auth flash messages */		
+		#messages {
+			background-color: DarkBlue;
+			color: #fff;
+			padding: 10px;
+			margin-top: 10px;
+		}
+		
+		/* style icons on login page*/
+		.bi {
+			font-size: 1.3rem; 
+			color: MediumTurquoise;
+		}
+		
+		/*style link to login & registration*/
+		a {
+			color: MediumTurquoise;
+		
+		}
+		
+		/* button width on user.html */
+		#welcome_pg_btn{
+			width: 40%;
+		}
+	</style>	
+</head>
+
+<body>	
+	<div class="container">
+		<div class="row">
+			<div class="col-md">
+				<!-- center all content-->
+				<div class="d-flex justify-content-center">
+					<div class="reg_card form_container">
+						{% block content %} 
+							
+							<!--title for page-->
+							<div class="d-flex justify-content-center">
+								<h1> Register new User </h1>
+								<br>
+							</div>
+							
+							<!--registration input in a form
+							https://docs.djangoproject.com/en/4.2/topics/forms/#looping-over-the-form-s-fields -->
+							<div class="d-flex justify-content-center">
+								<!-- send post data as method-->
+								<!--use csrf_token to safely send data-->
+								<!--put paragraph tags in the default form to make it appear neater-->
+								<!--use input-groups for each field in the user creation form-->
+								<form action="{% url 'user_auth:user_registration' %}" method="post">
+									{% csrf_token %}
+									<div class="input-field">
+									<!--put paragraph tags in the default form to make it appear neater-->
+									{{form.as_p}}
+									</div>
+									
+									<center>
+										<button type="submit" class="btn mb-4">Register</button>
+									</center>
+									
+									<!--show form error message if requirements are not met-->
+									{{form.errors}}
+									
+									<!--link to login page-->
+									<div class= "d-flex justify-content-center links">
+										<p>Already have an account?
+											<a href="{% url 'user_auth:login' %}">Login</a>
+										</p>
+									</div>
+								</form>
+							</div>
+							
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,90 @@
+{% extends "cold meats.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+		<link href="{% static 'CSS/StyleSheet_cold_meats.css' %}" rel = "stylesheet" type = "text/css"> 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>{% block title %}Detail page{% endblock %}</title>	
+	</head>
+	
+	<body>
+		{% block content %}
+		<section>
+			<div class="container-fluid text-center">
+				<div class="row my-5 align-items-center justify-content-center">			
+					<div class = "col d-flex justify-content-center">
+						<div class="card" style="width: 30rem; background-color: AliceBlue;">					
+							<img src= "{% static 'assets/card_img.png' %}" alt="Poll" class="card-img-top">
+							<div class="card-body">
+								<!--use dot-lookup syntax to access variable attributes 
+								e.g. {{ question.question_text }}, first Django does a dictionary lookup on the object question.
+								failing that, it tries an attribute lookup – which works, in this case. 
+								if attribute lookup has failed, it would’ve tried a list-index lookup-->
+								<h2 class="card-title"> {{question.question_text}}</h2>
+								
+								{% if error_message %}
+								<p><strong>{{error_message}}</strong></p>
+								{% endif %}
+							</div>
+							
+								<!--the post method was used to send data to the server
+								the url in the action attribute was used to send data to the server-->
+								<form action="{% url 'polls:vote' question.id %}" method="post">
+									<!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
+									{% csrf_token %}
+									<div class="form-group">
+									<!--Method-calling happens in the for loop: question.choice_set.all is
+									interpreted as the Python code question.choice_set.all(), which returns an
+									iterable of Choice objects and is suitable for use in the for tag.-->
+									<!--use a for loop to add a radio button for each choice associated with a specific question in the database-->
+									{% for choice in question.choice_set.all %}
+									<!--Radio buttons. Each choice that is associated with that particular question is
+									then displayed using a radio button in a form.-->
+									<!--The name of each radio button is choice-->
+									<!--the id attribute for each radio button is the Choice’s ID (from the database)-->
+									<input type="radio" name="choice" 
+									id="choice {{forloop.counter}}" value="{{ choice.id }}" />
+									<label for="choice {{ forloop.counter }}">
+										{{ choice.choice_text }}
+									</label>
+									<br/>
+									{% endfor %}
+									
+									<!-- A button that allows the user to submit their choice-->
+									<!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
+									<!--use margins to allow space above-under the button-->
+									<input type="submit" value="Vote" id="poll_detail_btn" 
+									style="margin-bottom: 20px;
+									margin-top: 5px; 
+									border-radius: 2px;
+									background-color: PaleTurquoise;
+									border: GoldenRod;"/>	
+									</div>
+								</form>	
+							
+							<div class="card-footer">
+								<!--move button to the center with d-flex & mx-auto-->
+								<div class="d-flex">
+									<button class="btn mx-auto no-underline"><a href="{% url 'polls:index' %}" style="background-color: MediumTurquoise !important; margin-bottom: 20px;
+									margin-top: 5px; 
+									border-radius: 2px;
+									padding:5px;
+									border: GoldenRod;
+									text-decoration: none; 
+									color: black;
+									" id="poll_detail_btn">Vote on another poll!</a></button>								
+								</div>										
+							</div>	
+								
+						</div>	
+					</div>			
+				</div>
+			</div>  
+		{% endblock %}
+		</section>
+	</body>
+</html>

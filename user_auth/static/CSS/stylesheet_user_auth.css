@@ -1,0 +1,69 @@
+/* use h-offset v-offset blur spread color; for box shadow & incl moz + webkit for different (older) browsers
+Flex items are arranged vertically in a column from top to bottom. 
+vertically center with mt, mb auto in container.
+element's position will be calculated relative to its normal position in the document flow, rather than relative to the viewport or any other positioned elements */
+.reg_card {
+	width: 450px;
+	margin-top: auto;
+	margin-bottom: auto;
+	background: SeaShell;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 5px;
+	box-shadow: 0 0 30px #AFEEEE;
+
+}
+
+/* --leave space around the form */
+.form_container {
+	margin-top: 120px;
+	margin-bottom: 100px;
+}
+		
+/* Set a style for the submit button */
+.btn {
+	background-color: #AFEEEE;
+	color: black;
+	padding: 15px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 1;
+}
+
+/*set a hover effect for the button*/
+.btn:hover {
+	opacity: 0.8;
+	color:PapayaWhip;
+}
+
+/* styles for user_auth flash messages */		
+#messages {
+	background-color: DarkBlue;
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+/* style icons on login page*/
+.bi {
+	font-size: 1.3rem; 
+	color: MediumTurquoise;
+}
+
+/*style link to login & registration*/
+a {
+	color: #AFEEEE;
+
+}
+
+/* button width on user.html */
+#welcome_pg_btn{
+	width: 40%;
+}

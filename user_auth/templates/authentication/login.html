@@ -1,0 +1,88 @@
+{% extends "authentication/user_registration.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">	
+		<link href="{% static 'CSS/stylesheet_user_auth.css' %}" rel = "stylesheet" type = "text/css"> 
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>
+			{% block title %}
+				Login
+			{% endblock %}
+		</title>			
+	</head>
+	
+	<body>	
+		{% block content %} 
+		<div class="container"> 
+			<div class="d-flex justify-content-center mt-3">
+				<!--title for page-->
+				<h1> Login as User </h1>			
+			</div>
+			<br>
+			
+			<div class="d-flex justify-content-center">
+				<!-- form to login user 
+				<!--action attribute specifies the URL or the server-side script that will handle the form data when it is submitted-->
+				<!--use post method to submit sensitive data such as login credentials - it sends the data in the request body rather than in the URL-->
+				<form action="{% url 'user_auth:authenticate_user' %}" method="post">
+					{% csrf_token %}
+					
+					<!-- use input-groups for each field and place icons on the left-->
+					<!--link for bootstap icons must be in head of base template to apply in child template, else svg can work here-->								
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">								
+								<i class="bi bi-person-circle"></i>
+							</span>
+						</div>
+						<!--use form-control to customise input fields-->
+						<input type="text" name="username" placeholder="Username" class="form-control" required>
+					</div>
+												
+					<!-- use input-groups for each field and place icons on the left-->
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<span class="input-group-text">								
+								<i class="bi bi-key-fill"></i>
+							</span>
+						</div>
+							<!--use form-control to customise input fields-->
+							<input type="password" name="password" placeholder="Password" class="form-control" required>
+					</div>
+					
+					<!--login button-->		
+					<center>
+					<input type="submit" value="Login" class= "btn mb-3"/>				
+					</center>
+					
+					<!--render flash messages from views.py here for successful user creation-->
+					<!--inline css since internal did not apply-->
+					{% for message in messages %}
+						<p id= "messages" 
+							style="
+							background-color: DarkBlue;
+							color: #fff;
+							padding: 10px;
+							margin-top: 10px;
+							">
+							{{message}}
+						</p>
+					{% endfor %}			
+				</form>			
+			</div>
+			
+			<!--add a link to the user creation page-->
+			<div class= "d-flex justify-content-center links">
+				<p>Don't have an account?
+					<a href="{% url 'user_auth:user_registration' %}">Create</a>
+				</p>
+			</div>
+		</div>
+		{% endblock %}	
+	</body>
+
+</html>

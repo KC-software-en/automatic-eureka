@@ -1,0 +1,51 @@
+{% extends "cold meats.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<link href="{% static 'CSS/StyleSheet_cold_meats.css' %}" rel = "stylesheet" type = "text/css"> 
+		<!-- enter a heading for blog-->
+		{% block title %}
+			The blog home page
+		{% endblock %}
+	</head>
+	<body>
+	{% block content %} 
+		<section>
+			<div class="container-fluid text-center">
+				<!--use class=my for margin above/below the card
+				align row content vertically & horizontally-->
+				<div class="row my-5 align-items-center justify-content-center">	
+					<!--Add the d-flex and justify-content-center classes to the column. 
+					This will make the column a flex container and center its contents horizontally-->
+					<div class = "col d-flex justify-content-center">
+						<div class="card" style="width: 30rem; background-color: AliceBlue; border: 5px solid AliceBlue;">					
+							<img src= "{% static 'assets/card_img.png' %}" alt="Poll" class="card-img-top">
+							<div class="card-body" id="no-underline">
+								<h1 class="card-title"><i>Posts</i></h1>
+								
+								<!-- list posts-->
+								<ul class="list-group list-group-flush" >
+									{% for post in object_list %}
+									<li class="list-group-item card_li">
+										<a href="/blog/{{post.id}}" style="text-decoration: none; color: black;">											
+											<div >
+												<h5 >{{ post.date|date:"Y-m-d" }}
+													<a href="/blog/{{post.id}}" style="text-decoration: none; color: black; font-size:18;">{{ post.title }}
+													</a>
+												</h5>	
+											</div>
+										</a>
+									</li>							
+									{% endfor %}	
+								</ul>
+							</div>
+						</div>
+					</div>			
+				</div>
+			</div>
+		</section>
+	{% endblock %}
+		
+	</body>
+</html>

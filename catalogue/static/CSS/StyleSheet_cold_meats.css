@@ -1,0 +1,185 @@
+/*style heading*/
+h1{		
+		font-weight: bold;
+		text-align: center;	
+	}
+
+/*style heading*/	
+h2{		
+	text-align: center;	
+	}	
+
+/*element positioned relative to its normal position in the document flow*/
+/*element will take up the entire width of its parent container*/
+/*content centered horizontally within the element*/
+/*content will be centered vertically within the element*/
+.container {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/*style font of subscribe footer*/
+.formedit{
+	font-size: 18px;
+}
+
+/* displayed <input> element purely inline*/
+input{
+	display: inline;
+}
+/*style font for text 'cold meats' */
+#cold_meats {
+	font-family: jumble, "eras bold ITC";
+	color: black;
+	font-weight: bold;
+	text-align: center;	
+}
+
+/*set the font size of the text inside the navigation*/
+/*set the border color of the navigation*/
+/*sets the navigation background to a semi-transparent color by adding 80 to the end of hexadecimal value */
+/*adds padding between the text and the border of the navigation element*/
+/*adds a box shadow effect to the navigation element
+values 0 0 30px determine the size and position of the shadow*/
+.nav{	
+	font-size: 25px;
+	border:#AFEEEE;						
+	background-color: #AFEEEE80;		
+	padding: 20px;
+	box-shadow: 0 0 30px #AFEEEE; 
+}
+
+/*make the <a> items in nav appear black*/
+.nav.flex-column a {
+	color: black;
+}
+
+/* ensures navigation stays fixed in its position when scrolling. Position the navigation at the top left corner of the page*/
+/* make menu height equal to the viewport height, ensuring it covers the entire screen*/
+/* add a vertical scrollbar to the menu if its content exceeds the screen height with overflow-y*/
+.nav.flex-column {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	overflow-y: auto;	
+}
+
+/*style font of the body element and its background*/
+body{
+	color: black;
+	font-size: 20px;
+	background-color: #FFF5EE;
+	text-align: justify;
+	text-align: center;
+}
+
+/*set a border around the card*/
+/*animate the transition between the original and hover styles*/
+/*position card as static so that it does not overlap nav*/
+.card {  
+	border: 5px solid AliceBlue;
+	background-color: AliceBlue;
+	transition: border-color 0.3s ease, box-shadow 0.3s;
+	position: static;
+	width: 30rem;
+}
+
+/*when hovering over card show a box shadow*/
+.card:hover {	
+	box-shadow: 0 0 30px #AFEEEE;
+}
+
+/* Set the desired height for the images */
+/* Ensure the images fill the container without distortion */
+.card-img-top {
+	height: 300px; 
+	object-fit: cover; 
+}
+
+/*set the size and colours for the cards that display shopping items*/
+#catalogue_card{
+	width: 18rem; 
+	height: 32rem; 
+	background-color: AliceBlue;
+	border: 5px solid AliceBlue;
+}
+
+/*place shadow*/
+/*set padding between content and border*/
+/*set margin between borders of each section*/
+/*position section as static so that it does not overlap nav*/
+/*set the background color of each section*/
+section {
+	color: black;
+	box-shadow: 0 0 30px #AFEEEE;
+	padding: 20px;
+	margin: 20px;
+	position: static;
+	background-color: #FFF5EE;
+	padding-left: 20px; 
+}
+
+/*set padding*/
+/*restrict the width since before it was partially covered by nav*/
+/*center the review <section> horizontally within its parent container*/
+#review {
+	padding: 20px;
+	max-width: 800px !important;
+	margin: 0 auto !important;
+}
+
+/*set margin */
+footer{
+	margin: 20px;
+	}
+
+/*show links black without underline*/
+.card_li{	
+	text-decoration: none; 
+	color: black;
+	}
+
+/*show links black without underline*/	
+.no-underline {
+	text-decoration: none; 
+	color: black;
+	}
+
+/*set the background color of button to add subscriber*/
+/*button laid out in a grid-like structure*/
+/*center the content horizontally*/
+/*align the content vertically to the bottom of the element*/
+/*set the height*/
+/*set the width*/
+/*center the text content within the element horizontally*/
+/*create margin between the element and its neighboring elements*/
+/*add rounded corners with a radius*/
+/*create padding between the text and the button's border*/
+#Add_subscriber{
+	background-color: #AFEEEE;
+	display: grid;
+	justify-content: center;
+	align-items: end;
+	height: 35px;
+	width: 105%;
+	text-align: center;	
+	margin-left: 10px;							
+	border-radius: 20px;
+	padding: 5px;
+	}
+
+/*style the buttons on poll_detail.html*/
+/*create margin*/
+/*add rounded corners with a radius*/
+/*set the background color of buttons*/
+/*set a border*/
+#poll_detail_btn{
+	margin-bottom: 20px;
+	margin-top: 5px; 
+	border-radius: 2px;
+	background-color: PaleTurquoise;
+	border: GoldenRod;
+	}

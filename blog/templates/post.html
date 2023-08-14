@@ -1,0 +1,44 @@
+{% extends "cold meats.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<link href="{% static 'CSS/StyleSheet_cold_meats.css' %}" rel = "stylesheet" type = "text/css"> 
+	<!-- enter a heading for blog-->
+	{% block title %}
+		{{ post.title }}
+	{% endblock %}
+</head>	
+<body>
+{% block content %}
+	<section style ="margin: 120px; padding:80px;">
+		<!--post entry-->
+		<header>
+			<h3 style ="text-align: center;"><a href="/blog/{{post.id}}" style="color: black;">{{ post.title }}</a></h3>
+		</header>
+				
+		<h6 style ="float:center;"> on {{ post.date }}</h6>
+		<br>
+		<div class = "container" id ="postbody" style="text-align: center;">
+			{{ post.body|safe|linebreaks}}
+			<br>		
+		</div>
+		<footer>
+			<!--show blog signature-->
+			<i style="font-size: 15px;
+				color: black;
+				float:right; 
+				margin: 10px;">
+				{{post.signature}}
+			</i>
+			<br>
+			<!--set a back button to the list of posts-->
+			<a href="{% url 'blog:blog home' %}" style="float:left;">
+				<i class="bi bi-arrow-left-circle" style="font-size: 30px; color: PaleTurquoise;"></i>
+			</a>
+		</footer>
+		<br><br>
+	</section>
+{% endblock %}
+</body>
+</html>
